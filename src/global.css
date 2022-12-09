@@ -1,10 +1,16 @@
 body {
     display: flex;
+    margin: 0;
     flex-direction: column;
     min-height: 100vh;
     color: #dedce9;
     background: #212636;
     font-family: sans-serif;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -29,12 +35,52 @@ footer .copyright {
     color: #494d6a;
     text-align: center;
 }
-footer .copyright a {
+footer svg {
+    fill: #494d6a
+}
+footer a {
     color: #494d6a;
 }
-footer .copyright a:hover {
+footer a:hover svg {
+    fill: #5c5f76
+}
+footer a:hover {
     color: #5c5f76;
 }
 footer .copyright:before {
     content: '©';
+}
+footer {
+    display: flex;
+    justify-content: space-around;
+}
+footer .github {
+    width: 85px;
+    display: flex;
+    justify-content: space-between;
+}
+footer .github p {
+    margin-top: 2px;
+}
+footer .rs-logo {
+    width: 85px;
+    height: 30px;
+}
+@media screen and (max-width: 480px) {
+    
+    footer .copyright {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    footer .copyright span {
+        display: flex;
+    }
+
+    footer .github {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
