@@ -2,7 +2,7 @@ import { Source } from '../../entities/data';
 import './sources.css';
 
 export default class Sources {
-    draw(data: Array<Source>) {
+    public draw(data: Array<Source>) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLMediaElement | null = document.querySelector('#sourceItemTemp');
 

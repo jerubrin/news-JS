@@ -1,8 +1,10 @@
 import { Articles, RemoteSources } from '../entities/data';
 import AppLoader from './appLoader';
 
+type GetSourcesCallback = (data: RemoteSources) => void;
+type GetNewsCallback = (data: Articles) => void;
 class AppController extends AppLoader {
-    getSources(callback: (data: RemoteSources) => void) {
+    public getSources(callback: GetSourcesCallback) {
         super.getResp<RemoteSources>(
             {
                 endpoint: 'sources',
@@ -11,7 +13,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: (data: Articles) => void) {
+    public getNews(e: Event, callback: GetNewsCallback) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
