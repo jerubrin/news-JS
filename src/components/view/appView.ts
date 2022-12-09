@@ -1,7 +1,8 @@
+import { Articles, RemoteSources } from '../entities/data';
 import News from './news/news';
 import Sources from './sources/sources';
 
-export class AppView {
+export default class AppView {
     news: News;
     sources: Sources;
 
@@ -10,15 +11,13 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: any) {
+    drawNews(data: Articles) {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: any) {
+    drawSources(data: RemoteSources) {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
 }
-
-export default AppView;

@@ -1,22 +1,24 @@
+import { Source } from '../../entities/data';
 import './sources.css';
 
-class Sources {
-    draw(data: any) {
+export default class Sources {
+    draw(data: Array<Source>) {
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp: HTMLMediaElement = document.querySelector('#sourceItemTemp');
+        const sourceItemTemp: HTMLMediaElement | null = document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: any) => {
-            if (!(sourceItemTemp instanceof HTMLTemplateElement)) return
-            const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
+        data.forEach((item: Source) => {
+            if (!(sourceItemTemp instanceof HTMLTemplateElement)) return;
+            const sourceClone: HTMLTemplateElement = sourceItemTemp.content.cloneNode(true) as HTMLTemplateElement;
 
-            (sourceClone as HTMLTemplateElement).querySelector('.source__item-name').textContent = item.name;
-            (sourceClone as HTMLTemplateElement).querySelector('.source__item').setAttribute('data-source-id', item.id);
+            const itemName: HTMLElement | null = sourceClone.querySelector('.source__item-name');
+            if (itemName != null) {
+                itemName.textContent = item.name;
+            }
+            sourceClone.querySelector('.source__item')?.setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
 
-        document.querySelector('.sources').append(fragment);
+        document.querySelector('.sources')?.append(fragment);
     }
 }
-
-export default Sources;

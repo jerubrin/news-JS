@@ -1,27 +1,18 @@
-import { ApiOptions } from "./appLoader";
-
-interface RespOptions {
-    endpoint: string,
-    options?: ApiOptions
-}
+import { ApiOptions, RespOptions } from '../entities/data';
 
 class Loader {
-    constructor(
-        public baseLink: String, 
-        public options: ApiOptions
-    ) {
-    }
+    constructor(public baseLink: string, public options: ApiOptions) {}
 
-    getResp(
+    getResp<Data>(
         { endpoint, options = {} }: RespOptions,
-        callback: (data?: any) => void = () => {
+        callback: (data: Data) => void = () => {
             console.error('No callback for GET response');
         }
     ) {
-        this.load('GET', endpoint, callback, options);
+        this.load<Data>('GET', endpoint, callback, options as ApiOptions);
     }
 
-    errorHandler(res: any) {
+    errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -31,22 +22,20 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: ApiOptions, endpoint: any) {
+    makeUrl(options: ApiOptions, endpoint: string) {
         const urlOptions: ApiOptions = { ...this.options, ...options };
-        const url = `${this.baseLink}${endpoint}?` +
-            Object.keys(urlOptions).reduce(
-                (val: string, key: string) => val += `${key}=${urlOptions[key]}&`, 
-                ''
-            );
+        const url =
+            `${this.baseLink}${endpoint}?` +
+            Object.keys(urlOptions).reduce((val, key) => (val += `${key}=${urlOptions[key] as string}&`), '');
 
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: any) => void, options: ApiOptions = {}) {
+    load<Data>(method: string, endpoint: string, callback: (data: Data) => void, options: ApiOptions = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
-            .then(this.errorHandler)
+            .then((status) => this.errorHandler(status))
             .then((res) => res.json())
-            .then((data) => callback(data))
+            .then((data: Data) => callback(data))
             .catch((err) => console.error(err));
     }
 }
