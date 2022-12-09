@@ -19,7 +19,7 @@ enum Status {
 }
 
 export interface RemoteSources extends State {
-    sources?: Array<Source>;
+    sources: Array<Source>;
 }
 
 export interface Source {
@@ -33,8 +33,8 @@ export interface Source {
 }
 
 export interface Articles extends State {
-    totalResults?: number;
-    articles?: Array<Article>;
+    totalResults: number;
+    articles: Array<Article>;
 }
 
 export interface Article {

@@ -1,11 +1,11 @@
 import { Articles, RemoteSources } from '../entities/data';
 import AppLoader from './appLoader';
 
-type GetSourcesCallback = (data: RemoteSources) => void;
-type GetNewsCallback = (data: Articles) => void;
+type GetSourcesCallback = (data: Partial<RemoteSources>) => void;
+type GetNewsCallback = (data: Partial<Articles>) => void;
 class AppController extends AppLoader {
     public getSources(callback: GetSourcesCallback) {
-        super.getResp<RemoteSources>(
+        super.getResp<Partial<RemoteSources>>(
             {
                 endpoint: 'sources',
             },
@@ -22,7 +22,7 @@ class AppController extends AppLoader {
                 const sourceId = target.getAttribute('data-source-id') as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp<Articles>(
+                    super.getResp<Partial<Articles>>(
                         {
                             endpoint: 'everything',
                             options: {
