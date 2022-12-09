@@ -1,34 +1,39 @@
 body {
-    color: #fff;
-    background: #17181c;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #dedce9;
+    background: #212636;
     font-family: sans-serif;
 }
 
 header {
-    padding: 10px 30px;
+    padding: 6px 10px;
 }
 
 header h1 {
-    font-size: 40px;
+    text-align: center;
+    font-size: 1.8em;
     font-weight: 800;
 }
 
 footer {
     height: 100px;
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: #494d6a;
     text-align: center;
 }
 footer .copyright a {
-    color: #444;
+    color: #494d6a;
 }
 footer .copyright a:hover {
-    color: #555;
+    color: #5c5f76;
 }
 footer .copyright:before {
     content: '©';
